@@ -7,7 +7,7 @@ namespace ariel{
 class Algorithms{
 
 public:
-    
+    void  DFS (const Graph& myGraph,int vertex,std ::vector<bool>& visited);
     static bool isConnected(const Graph& g);
     static std::vector<int> shortestPath(const Graph& g , int start , int end );
     static bool isContainsCycle(const Graph& g);
