@@ -43,9 +43,23 @@ namespace ariel{
 
 
         void Graph ::loadGraph (const std :: vector<std :: vector<int>>& mat){
-            if (mat[0].size() != totalVertices||mat.size() != totalVertices){
-                throw std ::invalid_argument("There is a problem! \n The Matrix dimensions do not match the number of vertices.");
+            
+            if(mat.empty()){
+                throw std ::invalid_argument("this matrix you have entered is empty!");
             }
+            size_t numRows = mat.size();
+            size_t numCols = mat[0].size();
+
+            for(const auto& row : mat){
+                if(row.size() != numCols){
+                    throw std :: invalid_argument("This matrix isn't rectangular");
+                }
+            }
+            if (numRows != numCols){
+                throw std :: invalid_argument("This matrix isn't square");
+            }
+            
+            totalVertices = mat.size();
             adjMat =mat ;  
         }
 

@@ -57,9 +57,13 @@ int main()
     cout << Algorithms::isConnected(g) << endl;        // Should print: "1" (true).
     cout << Algorithms::shortestPath(g, 0, 4) << endl; // Should print: 0->2->3->4.
     cout << Algorithms::isContainsCycle(g) << endl;    // Should print: "0" (false).
-    cout << Algorithms::isBipartite(g) << endl;        // Should print: "The graph is bipartite: A={0, 2, 4}, B={1, 3}."
-
+    cout << Algorithms::isBipartite(g) << endl;        // Should print: "The graph is not bipartite"
     // 5x4 matrix that reprsents invalid graph.
+
+
+
+
+    
     vector<vector<int>> graph4 = {
         {0, 1, 2, 0},
         {1, 0, 3, 0},
@@ -74,4 +78,14 @@ int main()
     {
         cout << e.what() << endl; // Should print: "Invalid graph: The graph is not a square matrix."
     }
+
+        vector<vector<int>> graph5 = {
+        {0, -1, 4, 0, 0},
+        {0, 0, 3, 2, 2},
+        {0, 0, 0, 0, 0},
+        {0, 1, 5, 0, 0},
+        {0, 0, 0, -3, 0}
+    };
+    g.loadGraph(graph5);
+    cout << Algorithms::negativeCycle(g) << endl;
 }
