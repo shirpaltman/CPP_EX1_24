@@ -5,7 +5,7 @@
 
 using namespace std;
 using namespace ariel;
-namespace    Algorithms{
+
 
     //Algorithms algorithms;
 
@@ -172,4 +172,3 @@ namespace    Algorithms{
 
 
 
-}

@@ -7,7 +7,7 @@ namespace ariel{
 class Algorithms{
 
 public:
-    void DFS(const Graph& myGraph,size_t vertex,std ::vector<bool>& visited);
+    static void DFS(const Graph& myGraph,size_t vertex,std ::vector<bool>& visited);
     static bool isConnected(const Graph& g);
     static std::string shortestPath(const Graph& g , int start , int end );
     static bool  containsCircleHelper(const Graph& myGraph,size_t ver, std ::vector<bool>& visited, std::vector<bool>& currVisit);

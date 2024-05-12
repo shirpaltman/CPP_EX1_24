@@ -3,10 +3,9 @@
  * Author: Benjamin Saldman.
  */
 
-#include "Graph.hpp"
 #include "Algorithms.hpp"
+#include "Graph.hpp"
 using namespace ariel;
-using namespace Algorithms;
 
 #include <iostream>
 #include <stdexcept>

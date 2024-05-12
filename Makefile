@@ -14,7 +14,7 @@ demo: Demo.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o $@ -lstdc++
 
 test: TestCounter.o Test.o $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $^ -o $@-lstdc++ -lm
+	$(CXX) $(CXXFLAGS) $^ -o $@-lstdc++
 
 all: demo test
 
