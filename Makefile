@@ -11,10 +11,10 @@ run: demo
 	./$^
 
 demo: Demo.o $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@ -lstdc++
 
 test: TestCounter.o Test.o $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@-lstdc++ -lm
 
 all: demo test
 

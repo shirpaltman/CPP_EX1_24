@@ -49,10 +49,30 @@ namespace ariel{
             adjMat =mat ;  
         }
 
+        int Graph ::getWeight(unsigned int numRow,unsigned int numCol)const{
+            //check that the colum and row meets the conditions (within the limits)
+            if(numRow >= totalVertices || numCol >= totalVertices){
+                throw std::out_of_range("the node is out of range! ");
+            }
+            return adjMat[numRow][numCol];
+
+        }
 
 
+        
+        std::vector<int> Graph:: getNeighbors(unsigned int ver)const {
+            std::vector<int> neighbors;
+            if (ver< adjMat.size()){
+                for(std::vector<int>::size_type i =0; i< adjMat[ver].size();++i){
+                    if(adjMat[ver][i]!=0){
+                        neighbors.push_back(static_cast<int>(i));
+                    }
+                }
+            }
+            return neighbors;
+        }
 
-};
+}
 
 
 
