@@ -1,16 +1,19 @@
 /*
- * Demo program for Exercise 2.
- * Author: Benjamin Saldman.
- */
+Author:Shir Altman
+ID:325168870
+Email: shirpaltman@gmail.com
+*/
 
 #include "Algorithms.hpp"
 #include "Graph.hpp"
 using namespace ariel;
+using namespace Algorithms;
 
 #include <iostream>
 #include <stdexcept>
 #include <vector>
 using namespace std;
+
 
 int main()
 {

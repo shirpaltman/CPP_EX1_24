@@ -1,3 +1,9 @@
+/*
+Author:Shir Altman
+ID:325168870
+Email: shirpaltman@gmail.com
+*/
+
 #include "Graph.hpp"
 #include <vector>
 #include <stack>
@@ -11,7 +17,7 @@ namespace ariel{
         //Graph(int totalVertices) : totalVertices(totalVertices), adjMat(static_cast<int>(totalVertices), std :: vector<size_t> (static_cast<int>(totalVertices),0)){}
         
 
-        int Graph::getNumVertices ()const{
+        int ariel::Graph::getNumVertices ()const{
             return this -> totalVertices;
         }
         
@@ -20,7 +26,7 @@ namespace ariel{
         }
 
 
-        bool Graph::isEdge(unsigned int ver1 , unsigned int ver2)const{
+        bool ariel::Graph::isEdge(unsigned int ver1 , unsigned int ver2)const{
             try{
                 return this->adjMat.at(ver1).at(ver2) != 0;
             }
@@ -31,7 +37,7 @@ namespace ariel{
         
         }
 
-        void Graph::printGraph()const{
+        void ariel::Graph::printGraph()const{
             for(std::vector<int>::size_type i=0;i<adjMat.size();i++){
                 for(std ::vector<int>::size_type j=0;j<adjMat[i].size();j++){
                     std::cout <<adjMat[i][j]<< " ";
@@ -42,7 +48,7 @@ namespace ariel{
 
 
 
-        void Graph ::loadGraph (const std :: vector<std :: vector<int>>& mat){
+        void ariel::Graph::loadGraph (const std :: vector<std :: vector<int>>& mat){
             
             if(mat.empty()){
                 throw std ::invalid_argument("this matrix you have entered is empty!");
@@ -63,7 +69,7 @@ namespace ariel{
             adjMat =mat ;  
         }
 
-        int Graph ::getWeight(unsigned int numRow,unsigned int numCol)const{
+        int ariel::Graph ::getWeight(unsigned int numRow,unsigned int numCol)const{
             //check that the colum and row meets the conditions (within the limits)
             if(numRow >= totalVertices || numCol >= totalVertices){
                 throw std::out_of_range("the node is out of range! ");
@@ -74,7 +80,7 @@ namespace ariel{
 
 
         
-        std::vector<int> Graph:: getNeighbors(unsigned int ver)const {
+        std::vector<int> ariel::Graph:: getNeighbors(unsigned int ver)const {
             std::vector<int> neighbors;
             if (ver< adjMat.size()){
                 for(std::vector<int>::size_type i =0; i< adjMat[ver].size();++i){
@@ -86,7 +92,7 @@ namespace ariel{
             return neighbors;
         }
 
-}
+};
 
 
 

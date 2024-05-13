@@ -1,20 +1,29 @@
+#/*
+#*Author:Shir Altman
+#*ID:325168870
+#*Email: shirpaltman@gmail.com
+#*/
+
 #!make -f
 
 CXX=clang++
 CXXFLAGS=-std=c++11 -Werror -Wsign-conversion
 VALGRIND_FLAGS=-v --leak-check=full --show-leak-kinds=all  --error-exitcode=99
 
-SOURCES=Graph.cpp Algorithms.cpp 
+SOURCES=Graph.cpp Algorithms.cpp TestCounter.cpp Test.cpp
+
 OBJECTS=$(subst .cpp,.o,$(SOURCES))
 
-run: demo
-	./demo
 
-demo: Demo.o $(OBJECTS)
+run: demo 
+	./$^
+
+demo: Demo.o $(filter-out TestCounter.o Test.o, $(OBJECTS))
 	$(CXX) $(CXXFLAGS) $^ -o $@ -lstdc++
 
-test: TestCounter.o Test.o $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $^ -o $@-lstdc++
+
+test: TestCounter.o Test.o $(filter-out Demo.o, $(OBJECTS))
+	$(CXX) $(CXXFLAGS) -v $^ -o $@
 
 all: demo test
 
