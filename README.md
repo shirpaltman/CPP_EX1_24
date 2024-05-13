@@ -1,3 +1,11 @@
+
+### Author:Shir Altman ###
+### ID:325168870 ###
+### Email: shirpaltman@gmail.com ###
+ 
+
+
+
 ***
 ### 🎓 Welcome to Shir's Algorithms Adventure! 🚀
 
@@ -48,15 +56,15 @@ _**Graph.cpp is the implementation file for the Graph class. This class represen
 ***
 
 
-The `Graph` class is the core component of this library, offering functionalities for representing and manipulating graphs.
+The *Graph* class is the core component of this library, offering functionalities for representing and manipulating graphs.
 
-`Attributes:`
+*Attributes:*
 ### adjMat
  A 2D vector representing the adjacency matrix of the graph.
 ### totalVertices
  The total number of vertices in the graph.
 
-`Methods:`
+*Methods:*
 ### getNumVertices
 Returns the total number of vertices in the graph.
 ### getAdjMat
