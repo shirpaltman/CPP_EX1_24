@@ -5,7 +5,13 @@
 
 ***
 ### Algorithms ### 
+
+`Algorithms.cpp contains the implementation of various graph algorithms. It includes functions for performing Depth-First Search (DFS) traversal, checking if a graph is connected, finding the shortest path between two vertices, detecting cycles in a graph, determining if a graph is bipartite, and identifying negative cycles in a graph. These algorithms are essential for analyzing and manipulating graph data structures, offering insights into their properties and behavior.`
 *** 
+
+
+
+
 ### DFS
 This function performs Depth-First Search (DFS) traversal starting from the specified vertex in the given graph (myGraph). It marks visited vertices in the provided vector visited.
 
@@ -36,7 +42,11 @@ This function checks whether the given graph (myGraph) contains a negative cycle
 
 ***
 ### Graph ### 
+
+
+`Graph.cpp is the implementation file for the Graph class. This class represents a graph data structure and provides various functionalities for working with graphs, such as loading a graph from an adjacency matrix, printing the graph, checking for edges between vertices, getting the weight of an edge, and retrieving neighbors of a vertex. It encapsulates the underlying adjacency matrix and provides methods to interact with it efficiently.`
 ***
+
 
 The `Graph` class is the core component of this library, offering functionalities for representing and manipulating graphs.
 
