@@ -25,14 +25,18 @@ namespace Algorithms{
     void DFS(const Graph &myGraph, size_t vertex, std ::vector<bool> &visited){                           // want to implement the DFS algo
         visited[vertex] = true; // will mark the current vertex as visited in the same index
         for (size_t i = 0; i < myGraph.getNumVertices(); i++){
-            if (myGraph.isEdge(vertex, i) && !visited[i]){                             // check if the conditions for running DFS exist
-                DFS(myGraph, i, visited); // run DFS
+            if (myGraph.isEdge(vertex, i) && !visited[i]){      // check if the conditions for running DFS exist
+                DFS(myGraph, i, visited); // // Recursively call DFS on adjacent vertices
             }
         }
     }
 
     bool isConnected(const Graph &myGraph){
         int numVertices = myGraph.getNumVertices();
+        if(numVertices == 0){
+            cout << "the graph is connected" << endl;
+            return true;
+        }
         vector<bool> visited(static_cast<size_t>(numVertices), false);
         DFS(myGraph, 0, visited); // run DFS on the first vertex
         for (size_t i = 0; i < numVertices; i++){ // loop over all the vertices in the graph
@@ -46,6 +50,7 @@ namespace Algorithms{
 
     void relax(size_t u, size_t v, int weight, std::vector<int> &dist, std::vector<int> &parent)
     {
+            // Relaxation step to update shortest distance and parent if a shorter path is found
         if ((static_cast<size_t>(dist[u])) != std::numeric_limits<int>::max() && (static_cast<size_t>(dist[u] + weight)) < (static_cast<size_t>(dist[v])))
         {
             dist[v] = dist[u] + weight;
@@ -62,7 +67,7 @@ namespace Algorithms{
         parent.assign(totalVertices, -1);
         dist[static_cast<size_t>(start)] = static_cast<size_t>(0); // give the first vertex distance with the value 0
 
-        // run the relax function on the edges reapeatedly
+        // run the relax function on the edges reapeatedly (|V| -1)
         for (size_t i = 0; i < myGraph.getNumVertices() - 1; ++i)
         {
             for (size_t u = 0; u < myGraph.getNumVertices(); ++u)
@@ -93,7 +98,7 @@ namespace Algorithms{
                 }
             }
         }
-        return true;
+        return true;  //NO NEGETIVE CYCLE WAS DETECTED
     }
 
     std::string shortestPath(const Graph &myGraph, int start, int end)
@@ -102,6 +107,7 @@ namespace Algorithms{
         if (!bellmanFordAlgo(myGraph, start, dist, parent)){
             return "The graph contains negative cycle";
         }
+            // Check if start and end vertices are valid
         if (start < 0 || start >= myGraph.getNumVertices() || end < 0 || end >= myGraph.getNumVertices()){
             return "check the end and start vertices something is abnormal";
         }
@@ -113,6 +119,8 @@ namespace Algorithms{
         }
         structureShortPath = std::to_string(current) ;
         current = static_cast<size_t>(parent[current]);
+
+        // Reconstruct shortest path using parent array
         while (current != start){
             structureShortPath = std::to_string(current) + "->" + structureShortPath;
             current = static_cast<size_t>(parent[current]);
@@ -123,30 +131,32 @@ namespace Algorithms{
 
     bool negativeCycle(const Graph &myGraph){
         std::vector<int> dist, parent;
+
+        // Check if a negative cycle exists in the graph using Bellman-Ford algorithm
         return !bellmanFordAlgo(myGraph, 0, dist, parent);
     }
 
     bool isBipartite(const Graph &myGraph){
         size_t totalVertices = (static_cast<size_t>(myGraph.getNumVertices()));
-        vector<string> color(totalVertices, "WHITE");
+        vector<string> color(totalVertices, "WHITE"); // Color of vertices
 
+        // Perform BFS from each vertex to check bipartiteness
         for (size_t i = 0; i < totalVertices; i++){
-            // std::cout << "test" << endl;
             if (color[i] != "WHITE"){
-                continue;
+                continue;  // Skip if vertex already colored
             }
             queue<size_t> q;
             q.push(i);
-            color[i] = "BLUE";
+            color[i] = "BLUE";  // Color the first vertex
 
             while (!q.empty()){
                 size_t u = q.front();
                 q.pop();
 
                 for (size_t v = 0; v < totalVertices; ++v){
-                    // size_t v = myGraph.getNeighbors(static_cast<size_t>(u))
                     if ((myGraph.getAdjMat()[u][v] != 0 || myGraph.getAdjMat()[v][u] != 0) && u != v){
                         if (color[v] == "WHITE") {
+                         // Assign alternate color to adjacent vertices
                             if (color[u] == "BLUE"){
                                 color[v] = "RED";
                             }
@@ -159,7 +169,7 @@ namespace Algorithms{
                         else if (color[v] == color[u])
                         {
                             std::cout << "the graph is not bipartite" << endl;
-                            return false;
+                            return false;      
                         }
                     }
                 }
@@ -168,64 +178,69 @@ namespace Algorithms{
         std::cout << "the graph is bipartite" << endl;
         return true;
     }
-
+    // Perform DFS to find cycles
     string isCycle(const Graph& myGraph){
         size_t totalVer =static_cast<size_t>(myGraph.getNumVertices());
-        vector<unsigned int > color(totalVer,WHITE);
-        vector<unsigned int> previous(totalVer,totalVer);
+        vector<unsigned int > color(totalVer,WHITE);  // Color of vertices during traversal
+        vector<unsigned int> previous(totalVer,totalVer);  // Store the parent of each vertex
+        // Iterate over all vertices to find cycles
         for(size_t i =0 ; i<totalVer; ++i){
             if (color[i] == WHITE){
                 unsigned int temp = dfsVisit(myGraph,i,color,previous);
                 if(temp!=totalVer){
-                    return buildCycleString(temp,previous);
+                    return buildCycleString(temp,previous);    // Return the cycle if found
                 }
             }
         }
-        return "0"  ;
+        return "0"  ;   //Return "0" if no cycle is found
 
     }
 
-
+    // Helper function for DFS traversal to detect cycles
     unsigned int dfsVisit(const Graph& myGraph,size_t u, vector<unsigned int>& color,vector<unsigned int >& parent){
-        color[u]= GREY;
+        color[u]= GREY;  // Mark the vertex as being visited
         for(size_t v =0 ; v<myGraph.getNumVertices(); ++v){
             if(myGraph.isEdge(u,v)&& v!=u){
                 if(color[v]== WHITE){
-                    parent[v]=u;
+                    parent[v]=u;       // Set the parent of the vertex
                     return dfsVisit(myGraph,v,color,parent);
 
                 }
                 else{
                     if(color[v]==GREY && v!=parent[u]){
                         parent[v]=u;
-                        return v;
+                        return v;   // Return the vertex if a cycle is detected
                     }
                 }
             }
         }
         color[u]=BLACK;
-        return static_cast<unsigned int> (myGraph.getNumVertices());
+        return static_cast<unsigned int> (myGraph.getNumVertices());    // Return if no cycle is found
     }
 
+
+    // Function to build a string representation of the cycle
     string buildCycleString(unsigned int firstInCycle,const vector<unsigned int> & prev){
         string cyclePath = to_string(firstInCycle);
         unsigned int c= firstInCycle; 
         do{
-            c=prev[c];
+            c=prev[c];     // Traverse the cycle path using the parent array
             cyclePath +="<-" + to_string(c);  
         }
-        while (c != firstInCycle);
+        while (c != firstInCycle);    // Continue until the cycle is complete
         return cyclePath;    
     }
 
+
+    // Function to check if the graph contains a cycle
     bool isContainsCycle( const Graph & myGraph){
-        string cycle=isCycle(myGraph);
+        string cycle=isCycle(myGraph);   // Call isCycle to find a cycle in the graph
         if (cycle != "0"){
-            cout<<"Cycle found: " <<cycle<< endl;
+            cout<<"Cycle found: " <<cycle<< endl;      // Print the cycle if found
             return true;
         }
         else{
-            cout<< "0" <<endl;
+            cout<< "0" <<endl;     // Print "0" if no cycle is found
             return false;
         }
     } 

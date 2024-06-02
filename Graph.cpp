@@ -16,11 +16,13 @@ namespace ariel{
 
         //Graph(int totalVertices) : totalVertices(totalVertices), adjMat(static_cast<int>(totalVertices), std :: vector<size_t> (static_cast<int>(totalVertices),0)){}
         
-
+        //return the num of vertices in the graph 
         int ariel::Graph::getNumVertices ()const{
             return this -> totalVertices;
         }
         
+
+        //returns a refrence to the adjacency matrix in the graph
         const std::vector<std::vector<int>>& Graph::getAdjMat()const{
             return this->adjMat;
         }
@@ -69,6 +71,8 @@ namespace ariel{
             adjMat =mat ;  
         }
 
+
+        
         int ariel::Graph ::getWeight(unsigned int numRow,unsigned int numCol)const{
             //check that the colum and row meets the conditions (within the limits)
             if(numRow >= totalVertices || numCol >= totalVertices){
@@ -79,7 +83,8 @@ namespace ariel{
         }
 
 
-        
+
+        //the function returns a vector containing the neighbors of a given ver in the graph
         std::vector<int> ariel::Graph:: getNeighbors(unsigned int ver)const {
             std::vector<int> neighbors;
             if (ver< adjMat.size()){

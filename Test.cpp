@@ -269,3 +269,29 @@ TEST_CASE("Test isBipartite - Non-Bipartite Graph") {
     CHECK(Algorithms::isBipartite(g) == false); // Graph is not bipartite
 }
 
+TEST_CASE("Test invalid graph") {
+    ariel::Graph g;
+    vector<vector<int>> graph6 = {
+        {0, 1, 2, 0},
+        {1, 0, 3, 0},
+        {2, 3, 0, 4},
+        {0, 0, 4, 0},
+        {0, 0, 0, 5}};
+    CHECK_THROWS(g.loadGraph(graph6)); // Pass `graph6` to loadGraph function
+}
+
+TEST_CASE("Test isConnected"){
+    // Case 1: Empty graph
+    ariel::Graph g1;
+    CHECK(Algorithms::isConnected(g1) == true); // Empty graph is considered connected
+    // Case 2: Single vertex
+        ariel::Graph g2;
+        g2.loadGraph({{0}});
+        CHECK(Algorithms::isConnected(g2) == true); // Single vertex graph is connected
+
+        // Case 3: Disconnected graph
+        ariel::Graph g3;
+        g3.loadGraph({{0, 0}, {0, 0}});
+        CHECK(Algorithms::isConnected(g3) == false); // Disconnected graph
+
+}
